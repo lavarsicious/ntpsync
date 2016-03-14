@@ -4,8 +4,13 @@
   "description": "Calculate the delta between local clock and NTP time, via multiple requests to various servers in the server pool",
   "main": "./distribution/ntpSync.js",
   "scripts": {
-    "build": "babel source-es6 --presets babel-preset-es2015 --out-dir distribution"
+    "build": "babel source-es6 --presets babel-preset-es2015 --out-dir distribution",
+    "test": "node ./distribution/ntpSyncTest.js"
   },
+  "repository": {
+   "type": "git",
+   "url": "https://github.com/nikolai3d/ntpsync"
+ },
   "keywords": [
     "ntp",
     "node",
