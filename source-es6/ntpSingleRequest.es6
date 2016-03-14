@@ -12,15 +12,7 @@ const kDefaultServerCarousel = [
     "0.pool.ntp.org",
     "1.pool.ntp.org",
     "2.pool.ntp.org",
-    "3.pool.ntp.org",
-    "0.us.pool.ntp.org",
-    "1.us.pool.ntp.org",
-    "2.us.pool.ntp.org",
-    "3.us.pool.ntp.org",
-    "0.europe.pool.ntp.org",
-    "1.europe.pool.ntp.org",
-    "2.europe.pool.ntp.org",
-    "3.europe.pool.ntp.org"
+    "3.pool.ntp.org"
 ];
 
 const kDefaultTimeoutLatencyMS = 500;

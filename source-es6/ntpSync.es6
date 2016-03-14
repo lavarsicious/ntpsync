@@ -5,22 +5,10 @@ const ntpBurstRequest = require('./ntpBurstRequest');
  * @return {Promise} Promise that either resolves with an average number of milliseconds
  * local clock (Date.now())  is ahead of NTP or an NTP server communication error
  */
-function ntpLocalClockDeltaPromise() {
+function ntpLocalClockDeltaPromise(iNTPBurstConfig) {
     return new Promise((iResolve, iReject) => {
 
-        // Sample Config Object
-        const ntpBurstConfig = {
-            fServerCarousel: null, // Server set for NTP Requests (see ntpSingleRequest.es6 for default list)
-            fTimeoutLatencyMS: null, // NULL for default single-NTP request timeout: (Default: 500ms)
-            fRequestedSuccessfulSampleCount: 15, // successful request count: (Default: 10)
-            fBurstTimeoutMS: 5000, // Total burst timeout: (Default: 4000 ms)
-            // Advanced settings: connect custom services if needed
-            fSingleNTPRequestService: null, // wrapper for ntpDatePromise service
-            fTimeoutService: null, // wrapper for setTimeout service
-            fLocalClockService: null // wrapper for Date.now() service
-        };
-
-        const burstDataPromise = ntpBurstRequest.ntpDatePromiseBurstTimeout(ntpBurstConfig);
+        const burstDataPromise = ntpBurstRequest.ntpDatePromiseBurstTimeout(iNTPBurstConfig);
 
         burstDataPromise.then((iBurstDataArray) => {
 

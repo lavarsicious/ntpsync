@@ -77,7 +77,7 @@ function delay(iTimeMS, iTimeoutService) {
     });
 }
 
-const kDefaultRequestedSuccessfulSampleCount = 10;
+const kDefaultRequestedSuccessfulSampleCount = 4;
 const kDefaultBurstTimeoutMS = 4000;
 const kDefaultTimeoutService = {
     setTimeout: setTimeout /* Default Node.JS timeout */
