@@ -70,12 +70,12 @@ function ntpDatePromiseBurstTimeout(iMultiNTPRequestConfig) {
 
                     iNTPSingleRequestPromiseFunc(iNTPSingleRequestConfig).then((data) => {
                         // Success: add the result to samples
-                        console.log("OK " + JSON.stringify(data));
+                        // console.log("OK " + JSON.stringify(data));
                         burstArray.push(data);
                         iResolve();
                     }).catch((err) => {
                         // Failure: Move on to the next one
-                        console.log("ERR " + JSON.stringify(err));
+                        // console.log("ERR " + JSON.stringify(err));
                         iResolve();
                     });
 

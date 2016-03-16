@@ -16,9 +16,9 @@ const ntpBurstConfig = {
         "2.europe.pool.ntp.org",
         "3.europe.pool.ntp.org"
     ], // Server pool for NTP Requests (default [*.pool.ntp.org] (4 servers)
-    fTimeoutLatencyMS: 200, // NULL for default single-NTP request timeout: (Default: 500ms)
-    fRequestedSuccessfulSampleCount: 5, // successful request count: (Default: 4)
-    fBurstTimeoutMS: 5000, // Total burst timeout: (Default: 4000 ms)
+    fTimeoutLatencyMS: 300, // NULL for default single-NTP request timeout: (Default: 500ms)
+    fRequestedSuccessfulSampleCount: 8, // successful request count: (Default: 4)
+    fBurstTimeoutMS: 6000, // Total burst timeout: (Default: 4000 ms)
     // Advanced settings: connect custom services if needed
     fSingleNTPRequestService: null, // wrapper for ntpDatePromise service (default one is in ntpSingleRequest.es6)
     fTimeoutService: null, // wrapper for setTimeout service
@@ -26,9 +26,10 @@ const ntpBurstConfig = {
 };
 
 ntpsync.ntpLocalClockDeltaPromise(ntpBurstConfig).then((iNTPData) => {
-    console.log("iNTPData.minimalNTPLatencyDelta " + iNTPData.minimalNTPLatencyDelta);
-    console.log("iNTPData.minimalNTPLatency " + iNTPData.minimalNTPLatency);
-    console.log("iNTPData.totalSampleCount " + iNTPData.totalSampleCount);
+    console.log(
+        `"(Local Time - NTP Time) Delta = ${iNTPData.minimalNTPLatencyDelta} ms"`);
+    console.log(`"Corresponding Minimal Ping Latency was ${iNTPData.minimalNTPLatency} ms"`);
+    console.log(`"Calculated from ${iNTPData.totalSampleCount} successful NTP Pings"`);
 }).catch((err) => {
     console.log(err);
 });

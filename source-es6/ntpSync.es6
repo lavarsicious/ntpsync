@@ -12,7 +12,7 @@ function ntpLocalClockDeltaPromise(iNTPBurstConfig) {
 
         burstDataPromise.then((iBurstDataArray) => {
 
-            console.log("SUCCESS: " + JSON.stringify(iBurstDataArray));
+            // console.log("SUCCESS: " + JSON.stringify(iBurstDataArray));
             let totalServerNTPDelta = 0;
             let totalServerNTPLatency = 0;
             let totalSampleCount = 0;
@@ -39,14 +39,14 @@ function ntpLocalClockDeltaPromise(iNTPBurstConfig) {
             const averageNTPDelta = totalServerNTPDelta / totalSampleCount;
             const averageNTPLatency = totalServerNTPLatency / totalSampleCount;
 
-            console.log(
-                `Average Server - NTP Delta is ${averageNTPDelta} ms, ${totalSampleCount} samples,` +
-                `${averageNTPLatency} ms average latency`
-            );
-            console.log(
-                `Minimal Latency Server - NTP Delta is ${minimalNTPLatencyDelta} ms, ${totalSampleCount} samples,` +
-                `${minimalNTPLatency} ms minimum latency`
-            );
+            // console.log(
+            //     `Average Server - NTP Delta is ${averageNTPDelta} ms, ${totalSampleCount} samples,` +
+            //     `${averageNTPLatency} ms average latency`
+            // );
+            // console.log(
+            //     `Minimal Latency Server - NTP Delta is ${minimalNTPLatencyDelta} ms, ${totalSampleCount} samples,` +
+            //     `${minimalNTPLatency} ms minimum latency`
+            // );
             iResolve({
                 averageNTPDelta,
                 averageNTPLatency,
