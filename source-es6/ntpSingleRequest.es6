@@ -19,11 +19,18 @@ const kDefaultTimeoutLatencyMS = 500;
 
 /**
  * Creates a promise that resolves with an Date object after a successful NTP server query
- * @param {Object} iNTPSingleRequestConfig: Optional Custom Parameters containing:
- * fLocalClockService: an Object with a Now() function that returns
- * current local time in Unix milliseconds. Usually just a wrapper for Date.now();
- * fServerCarousel: an Array of Strings, IP Addresses of a server pool
- * fTimeoutLatencyMS: a timeout in milliseconds, when to bail on an NTP request
+ * @param {Object} iNTPSingleRequestConfig: Optional Custom Parameters object
+ *  {fLocalClockService: , fServerCarousel: ,fTimeoutLatencyMS: }:
+ *
+ *  fLocalClockService: an service object with a Now() function that returns current local time in Unix milliseconds.
+ *  Default value: kDefaultLocalClockService, which is just a wrapper for Date.now();
+ *
+ *  fServerCarousel: an Array of Strings, IP Addresses of a server pool
+ *  Default value: kDefaultServerCarousel
+ *
+ *  fTimeoutLatencyMS: a timeout in milliseconds, when to bail on an NTP request
+ *  Default value: kDefaultTimeoutLatencyMS
+ *
  * @return {Promise} Promise that either resolves with successful Date object or an NTP server communication
  * error
  */
