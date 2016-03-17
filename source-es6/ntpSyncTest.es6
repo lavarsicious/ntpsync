@@ -36,8 +36,7 @@ const nistBurstConfig = {
 };
 
 const logNTPSyncResult = (iNTPData) => {
-    console.log(
-        `"(Local Time - NTP Time) Delta = ${iNTPData.minimalNTPLatencyDelta} ms"`);
+    console.log(`"(Local Time - NTP Time) Delta = ${iNTPData.minimalNTPLatencyDelta} ms"`);
     console.log(`"Corresponding Minimal Ping Latency was ${iNTPData.minimalNTPLatency} ms"`);
     console.log(`"Calculated from ${iNTPData.totalSampleCount} successful NTP Pings"`);
 
