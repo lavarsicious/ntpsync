@@ -56,3 +56,8 @@ To run a small/example test suite, run:
 ```
 $ npm run test
 ```
+
+## References
+   1. NIST Internet Time Servers: http://tf.nist.gov/tf-cgi/servers.cgi
+   2. NTP: The Network Time Protocol. http://www.ntp.org/
+   3. **pool.ntp.org**: Public NTP time server for everyone http://www.pool.ntp.org/en/

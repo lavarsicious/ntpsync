@@ -15,21 +15,63 @@ const ntpBurstConfig = {
         "1.europe.pool.ntp.org",
         "2.europe.pool.ntp.org",
         "3.europe.pool.ntp.org"
-    ], // Server pool for NTP Requests (default [*.pool.ntp.org] (4 servers)
-    fTimeoutLatencyMS: 300, // NULL for default single-NTP request timeout: (Default: 500ms)
-    fRequestedSuccessfulSampleCount: 8, // successful request count: (Default: 4)
-    fBurstTimeoutMS: 6000, // Total burst timeout: (Default: 4000 ms)
-    // Advanced settings: connect custom services if needed
-    fSingleNTPRequestService: null, // wrapper for ntpDatePromise service (default one is in ntpSingleRequest.es6)
-    fTimeoutService: null, // wrapper for setTimeout service
-    fLocalClockService: null // wrapper for Date.now() service
+    ],
+    fTimeoutLatencyMS: 300,
+    fRequestedSuccessfulSampleCount: 8,
+    fBurstTimeoutMS: 6000
 };
 
-ntpsync.ntpLocalClockDeltaPromise(ntpBurstConfig).then((iNTPData) => {
+const nistBurstConfig = {
+    fServerCarousel: [
+        "utcnist.colorado.edu",
+        "time-a.nist.gov",
+        "time-b.nist.gov",
+        "time-c.nist.gov",
+        "time-d.nist.gov",
+        "time.nist.gov"
+    ],
+    fTimeoutLatencyMS: 500,
+    fRequestedSuccessfulSampleCount: 4,
+    fBurstTimeoutMS: 6000
+};
+
+const logNTPSyncResult = (iNTPData) => {
     console.log(
         `"(Local Time - NTP Time) Delta = ${iNTPData.minimalNTPLatencyDelta} ms"`);
     console.log(`"Corresponding Minimal Ping Latency was ${iNTPData.minimalNTPLatency} ms"`);
     console.log(`"Calculated from ${iNTPData.totalSampleCount} successful NTP Pings"`);
-}).catch((err) => {
-    console.log(err);
-});
+
+};
+
+const reportNTPSyncError = (iErr) => {
+    console.log(iErr);
+};
+
+const chainableNTPReport = (iNTPData) => {
+    return new Promise((iResolve) => {
+        console.log("NTP DATA:")
+        logNTPSyncResult(iNTPData);
+        iResolve();
+    });
+}
+
+const chainableNISTReport = (iNTPData) => {
+    return new Promise((iResolve) => {
+        console.log("NIST DATA:")
+        logNTPSyncResult(iNTPData);
+        iResolve();
+    });
+}
+
+const chainableNTPQuery = () => {
+    return ntpsync.ntpLocalClockDeltaPromise(ntpBurstConfig);
+};
+const chainableNISTQuery = () => {
+    return ntpsync.ntpLocalClockDeltaPromise(nistBurstConfig);
+};
+
+chainableNTPQuery()
+    .then(chainableNTPReport)
+    .then(chainableNISTQuery)
+    .then(chainableNISTReport)
+    .catch(reportNTPSyncError);
