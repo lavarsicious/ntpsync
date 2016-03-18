@@ -82,7 +82,7 @@ To run a small/example test suite, run:
 ```
 $ npm run test
 ```
-The test script (see `**ntpSyncTest.es6**`) performs two requests one after the other. One goes to [NTP server pool](http://www.pool.ntp.org/en/), another to [NIST server pool](http://tf.nist.gov/tf-cgi/servers.cgi). 
+The test script (see **`ntpSyncTest.es6`**) performs two requests one after the other. One goes to [NTP server pool](http://www.pool.ntp.org/en/), another to [NIST server pool](http://tf.nist.gov/tf-cgi/servers.cgi).
 Your output should be something like this:
 ```
 NTP DATA:
@@ -101,13 +101,13 @@ NIST DATA:
 You don't need it, but if you want it, here are the info you need:
 
 Main source files of the github repo are in `/source-es6` (ECMASCRIPT 6 files),
-To transcode via `babel (https://babeljs.io/)`:
+To transcode via [BABEL](https://babeljs.io/), do this:
 ```
 $ npm install
 $ npm run build
 ```
 
-That places all the ECMA-ES5-happy `.js` files into the  `/distribution` folder, you can then run the test suite either via
+That should place all the ECMA-ES5-happy `.js` files into the  `/distribution` folder, you can then run the test suite either via
 ```
 $ npm run test
 ```
