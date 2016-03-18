@@ -1,8 +1,13 @@
-# **ntpsync** - A NodeJS (LocalClock - NTPTime) Delta Calculator
+# :clock1: **ntpsync** - A NodeJS (LocalClock - NTPTime) Delta Calculator :clock2:
 
 ## Description
 
-**`ntpsync`** is a API for asynchronous requests of the (Local Server Time - NTP Server Time) Delta data from your NodeJS app. This can be used for global synchronization, local clock drift estimation, website countdown correction or any other time you would want to know the current time exactly without relying on the correctness of your server's local clock setting.
+**`ntpsync`** is a API for asynchronous requests of the (Local Server Time - NTP Server Time) Delta data from your NodeJS app. This can be used for global synchronization, local clock drift estimation, website countdown correction or in any other cases you'd want to know the current time exactly without relying on the correctness of your server's local clock setting.
+
+## How it works
+The result it returns is a **Delta Value in Milliseconds**, which means if your local time in Unix Epoch Milliseconds (e.g. `Date.now()`) is _**D**_ and the server's "true" time is _**T**_, the **ntpsync** service will return the estimate of the difference _**Delta = (D-T)**_, calculated to the best of its abilities. 
+
+At any moment after the sync is done, you can calculate the true time by subtracting _Delta_ from your local clock's Unix Epoch Milliseconds value: _t = D - Delta_. (This assumes that local clock hasn't been tampered with or hasn't drifted strongly since the last sync... Experiment away! :angry: **But do not stress the public NTP servers** :angry:, those are there for all to enjoy! :relaxed:)
 
 The algorithm used is based on a standard **NTP** ([Network Time Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol)) time estimation algorithm, so its precision depends on the latency to the NTP server being pinged. Server address is customizable, so if you have some fancy-shmancy GPS-Atomic-etc. Time Server on your local network ([like this](http://www.gpsntp.com/) or something), punch its IP in and let'er rip! By default, though, it uses [Public NTP time server pool](http://www.pool.ntp.org/en/), so your latency/mileage may vary. Do not assume Public NTP is precise, expect microsecond accuracy, or use this code to synchronize satellites orbiting a black hole, the thing was developed for *Galilean Relativity 4D Space-Time* only.
 
@@ -13,7 +18,7 @@ $ npm install ntpsync
 ```
 
 ## API
-**`ntpsync`** is a [Promise-based](https://www.promisejs.org/) API
+**`ntpsync`** is a [Promise-based](https://www.promisejs.org/) asynchronous API.
 ### Include
 
 ```
