@@ -82,7 +82,7 @@ To run a small/example test suite, run:
 ```
 $ npm run test
 ```
-The test file (see `ntpSyncTest.es6`) performs two requests one after the other. One to NTP server pool (http://www.pool.ntp.org/en/), another to NIST server pool(http://tf.nist.gov/tf-cgi/servers.cgi). 
+The test script (see `**ntpSyncTest.es6**`) performs two requests one after the other. One goes to [NTP server pool](http://www.pool.ntp.org/en/), another to [NIST server pool](http://tf.nist.gov/tf-cgi/servers.cgi). 
 Your output should be something like this:
 ```
 NTP DATA:
