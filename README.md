@@ -7,6 +7,12 @@
 ```
 $ npm install ntpsync
 ```
+
+## Distribution
+the package distribution is `/distribution` folder, however github Main source files are in `/source-es6` (ECMASCRIPT 6 files),  transcoded via `babel (https://babeljs.io/)`. If git clone instead of installing, transcode via:
+```
+$ npm run build
+```
 ## Usage
 
 ```
@@ -56,7 +62,11 @@ To run a small/example test suite, run:
 $ npm run test
 ```
 
+
+
 ## References
    1. NIST Internet Time Servers: http://tf.nist.gov/tf-cgi/servers.cgi
    2. NTP: The Network Time Protocol. http://www.ntp.org/
    3. **pool.ntp.org**: Public NTP time server for everyone http://www.pool.ntp.org/en/
+   4. Babel: Use next generation JavaScript, today. https://babeljs.io/
+   5. How to Build and Publish ES6 npm Modules Today, with Babel. https://booker.codes/how-to-build-and-publish-es6-npm-modules-today-with-babel/
