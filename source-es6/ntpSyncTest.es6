@@ -68,9 +68,22 @@ const chainableNTPQuery = () => {
 const chainableNISTQuery = () => {
     return ntpsync.ntpLocalClockDeltaPromise(nistBurstConfig);
 };
-
+//
 chainableNTPQuery()
     .then(chainableNTPReport)
     .then(chainableNISTQuery)
     .then(chainableNISTReport)
     .catch(reportNTPSyncError);
+
+// WARNING: This would get you an error since no concurrent NTPSYNC requests are allowed.
+
+// ntpsync.ntpLocalClockDeltaPromise().then((iNTPData) => {
+//     console.log("1 OK");
+// }).catch((err) => {
+//     console.log("1 failed : " + err);
+// });
+// ntpsync.ntpLocalClockDeltaPromise().then((iNTPData) => {
+//     console.log("2 OK");
+// }).catch((err) => {
+//     console.log("2 failed : " + err);
+// });
