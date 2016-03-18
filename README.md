@@ -1,4 +1,4 @@
-# ntpSync - nodeJS (LocalClock - NTPTime) delta calculator
+# **ntpsync** - A NodeJS (LocalClock - NTPTime) Delta Calculator
 
 ## Description
 
@@ -10,11 +10,17 @@ $ npm install ntpsync
 
 ## Usage
 
-An example code to use ntpsync with default values:
+An example code to use **`ntpsync`** with default values:
+
+### Include
 
 ```
 const ntpsync = require('ntpsync');
+```
 
+### Default Usage
+
+```
 ntpsync.ntpLocalClockDeltaPromise().then((iNTPData) => {
     console.log(`(Local Time - NTP Time) Delta = ${iNTPData.minimalNTPLatencyDelta} ms`);
     console.log(`Minimal Ping Latency was ${iNTPData.minimalNTPLatency} ms`);
@@ -24,9 +30,11 @@ ntpsync.ntpLocalClockDeltaPromise().then((iNTPData) => {
 });
 ```
 
-For more examples, see `ntpSyncTest.es6`
+### More Examples
 
-## Configuration object
+For more examples, see `source-es6/ntpSyncTest.es6`
+
+## Configuration Object
 
 Use the configuration object to fine-tune your time request. **All** of the configuration elements are optional.
 
@@ -82,7 +90,7 @@ To run a small/example test suite, run:
 ```
 $ npm run test
 ```
-The test script (see **`ntpSyncTest.es6`**) performs two requests one after the other. One goes to [NTP server pool](http://www.pool.ntp.org/en/), another to [NIST server pool](http://tf.nist.gov/tf-cgi/servers.cgi).
+The test script (see **`source-es6/ntpSyncTest.es6`**) performs two requests one after the other. One goes to [NTP server pool](http://www.pool.ntp.org/en/), another to [NIST server pool](http://tf.nist.gov/tf-cgi/servers.cgi).
 Your output should be something like this:
 ```
 NTP DATA:
