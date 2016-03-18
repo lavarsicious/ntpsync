@@ -2,16 +2,18 @@
 
 ## Description
 
+**`ntpsync`** is a API for asynchronous requests of the (Local Server Time - NTP Server Time) Delta data from your NodeJS app. This can be used for global synchronization, local clock drift estimation, website countdown correction or any other time you would want to know the current time exactly without relying on the correctness of your server's local clock setting.
+
+The algorithm used is based on a standard **NTP** ([Network Time Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol)) time estimation algorithm, so its precision depends on the latency to the NTP server being pinged. Server address is customizable, so if you have some fancy-shmancy GPS-Atomic-etc. Time Server on your local network ([like this](http://www.gpsntp.com/) or something), punch its IP in and let'er rip! By default, though, it uses [Public NTP time server pool](http://www.pool.ntp.org/en/), so your latency/mileage may vary. Do not assume Public NTP is precise, expect microsecond accuracy, or use this code to synchronize satellites orbiting a black hole, the thing was developed for *Galilean Relativity 4D Space-Time* only.
+
 ## Installation
 
 ```
 $ npm install ntpsync
 ```
 
-## Usage
-
-An example code to use **`ntpsync`** with default values:
-
+## API
+**`ntpsync`** is a [Promise-based](https://www.promisejs.org/) API
 ### Include
 
 ```
@@ -131,3 +133,4 @@ $ node ./distribution/ntpSyncTest.js
    3. **pool.ntp.org**: Public NTP time server for everyone http://www.pool.ntp.org/en/
    4. Babel: Use next generation JavaScript, today. https://babeljs.io/
    5. How to Build and Publish ES6 npm Modules Today, with Babel. https://booker.codes/how-to-build-and-publish-es6-npm-modules-today-with-babel/
+   6. JavaScript Promises: https://www.promisejs.org/
