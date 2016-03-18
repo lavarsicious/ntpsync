@@ -9,6 +9,8 @@ The result it returns is a **Delta Value in Milliseconds**, which means if your 
 
 At any moment after the sync is done, you can calculate the true time by subtracting _Delta_ from your local clock's Unix Epoch Milliseconds value: _t = D - Delta_. (This assumes that local clock hasn't been tampered with or hasn't drifted strongly since the last sync... Experiment away! :angry: **But do not stress the public NTP servers** :angry:, those are there for all to enjoy! :relaxed:)
 
+You can specify a server pool or use a default one. Servers in a pool will be pinged in a round-robin fashion, starting from the first one in the list. If a request fails or times out, the next server is pinged, all until the successful count of NTP pings is reached (or the entire thing times out). See [Configuration Object] below for customization details. 
+
 The algorithm used is based on a standard **NTP** ([Network Time Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol)) time estimation algorithm, so its precision depends on the latency to the NTP server being pinged. Server address is customizable, so if you have some fancy-shmancy GPS-Atomic-etc. Time Server on your local network ([like this](http://www.gpsntp.com/) or something), punch its IP in and let'er rip! By default, though, it uses [Public NTP time server pool](http://www.pool.ntp.org/en/), so your latency/mileage may vary. Do not assume Public NTP is precise, expect microsecond accuracy, or use this code to synchronize satellites orbiting a black hole, the thing was developed for *Galilean Relativity 4D Space-Time* only.
 
 ## Installation
@@ -47,7 +49,8 @@ Use the configuration object to fine-tune your time request. **All** of the conf
 
 ### Basic Parameters
 
-   * **fServerCarousel** an Array of Strings, IP Addresses of a server pool. (default: `[
+
+   * **fServerCarousel** an Array of Strings, IP Addresses of a server pool.  (default: `[
        "0.pool.ntp.org",
        "1.pool.ntp.org",
        "2.pool.ntp.org",
@@ -57,7 +60,6 @@ Use the configuration object to fine-tune your time request. **All** of the conf
    * **fRequestedSuccessfulSampleCount**: How many successful pings do you want to have in your result calculations? (default: 4)
 
    *  **fTimeoutLatencyMS**: Total allotted time (in milliseconds) for _**a single NTP ping**_ to complete. when to bail on  (default: 500)
-
 
    * **fBurstTimeoutMS**: Total allotted time (in milliseconds) for the _**entire burst**_ to complete. If it times out, the promise will reject. (default: 4000)
 
