@@ -1,4 +1,4 @@
 node_modules
 distribution
 .DS_Store
-*.txt
+*.csv

@@ -19,7 +19,7 @@ const logDrift = (iNTPData) => {
 
     const driftString = secondsSinceStart.toString() + ", " + iNTPData.minimalNTPLatencyDelta + "\n";
 
-    fs.appendFile('driftlog.txt', driftString, (err) => {
+    fs.appendFile('driftlog.csv', driftString, (err) => {
         if (err) {
             throw err;
         }

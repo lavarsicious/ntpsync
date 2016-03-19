@@ -19,8 +19,6 @@ function ntpLocalClockDeltaPromise(iNTPBurstConfig) {
 
         burstDataPromise.then((iBurstDataArray) => {
 
-
-
             // console.log("SUCCESS: " + JSON.stringify(iBurstDataArray));
             let totalServerNTPDelta = 0;
             let totalServerNTPLatency = 0;
