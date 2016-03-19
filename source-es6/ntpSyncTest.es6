@@ -1,4 +1,4 @@
-var ntpsync = require('./ntpSync');
+var ntpsync = require('./ntpsync');
 
 
 const ntpBurstConfig = {
