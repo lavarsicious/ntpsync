@@ -40,6 +40,16 @@ const logNTPSyncResult = (iNTPData) => {
     console.log(`"Corresponding Minimal Ping Latency was ${iNTPData.minimalNTPLatency} ms"`);
     console.log(`"Calculated from ${iNTPData.totalSampleCount} successful NTP Pings"`);
 
+    const localClockTimeMS = Date.now();
+
+    const adjustedClockTimeMS = localClockTimeMS - iNTPData.minimalNTPLatencyDelta;
+
+    var localClockDateString = new Date(localClockTimeMS).toISOString();
+    var adjustedlocalClockDateString = new Date(adjustedClockTimeMS).toISOString();
+
+    console.log(`Local UTC Clock Time: ${localClockDateString}`);
+    console.log(`Adjusted Local UTC Clock Time: ${adjustedlocalClockDateString}`);
+
 };
 
 const reportNTPSyncError = (iErr) => {
