@@ -14,10 +14,10 @@ You can specify a server pool or use a default one. Servers in a pool will be pi
 The algorithm used is based on a standard [NTP Clock Synchronization Algorithm](https://en.wikipedia.org/wiki/Network_Time_Protocol#Clock_synchronization_algorithm), so its **precision depends both on NTP servers' time accuracy and on the latency of succesful NTP pings**. Server address is customizable, so if you have some fancy-shmancy GPS-Atomic-etc. Time Server on your local network ([like this](http://www.gpsntp.com/) or something), punch its IP in and let'er rip! By default, though, it uses [Public NTP time server pool](http://www.pool.ntp.org/en/), so your latency/mileage may vary. Do not assume Public NTP is precise.
 
 ## What it doesn't do
-    * Does not deal with the _time zones_, time delta provided is UTC Unix Milliseconds only.
-    * Does not deal with the _daylight savings_, time delta provided is UTC Unix Milliseconds only.
-    * Does not deal with _relativistic time dilation_. Developed for *Galilean Relativity 4D Space-Time* only. Do not use this code to synchronize satellites orbiting a black hole.
-    * Provide millisecond accuracy. Actual confidence interval, at worst, in various conditions, is about fifth of a second (~200 ms).
+   * Does not deal with the _time zones_, time delta provided is UTC Unix Milliseconds only.
+   * Does not deal with the _daylight savings_, time delta provided is UTC Unix Milliseconds only.
+   * Does not deal with _relativistic time dilation_. Developed for *Galilean Relativity 4D Space-Time* only. Do not use this code to synchronize satellites orbiting a black hole.
+   * Provide millisecond accuracy. Actual confidence interval, at worst, in various conditions, is about fifth of a second (~200 ms).
 
 ## Installation
 
