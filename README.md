@@ -4,14 +4,20 @@
 
 **`ntpsync`** is a API for asynchronous calculation of the **(Local Server Time - NTP Server Time) Delta, in milliseconds**. (henceforth referred to as **"Delta"**) value from your NodeJS app. This can be used for global synchronization, local clock drift estimation, website countdown correction or in any other cases you'd want to know the current time exactly without relying on the correctness of your server's local clock setting.
 
-## How it works
-The **"Delta"** value is calculated as follows: if your local time in Unix Epoch Milliseconds (e.g. `Date.now()`) is _**D**_ and the current "true" time is _**T**_, the **ntpsync** service will return the estimate of the difference _**Delta = (D-T)**_, calculated to the best of its abilities by performing multiple Network Time Protocol pings of various NTP servers, and choosing the value from a ping with a lowest latency.  
+## What it does
+The **"Delta"** value is calculated as follows: if your local time in Unix Epoch Milliseconds (e.g. `Date.now()`) is _**D**_ and the current "true" time is _**T**_, the **ntpsync** service will return the estimate of the difference _**Delta = (D-T)**_, calculated to the best of its abilities by performing multiple [Network Time Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol) pings of various NTP servers, and choosing the value from a ping with a lowest latency.  
 
 At any moment after the sync is done, you can calculate the true time by subtracting the **"Delta"** from your local clock's Unix Epoch Milliseconds value: _t = D - Delta_. (This assumes that local clock hasn't been tampered with or hasn't drifted strongly since the last sync... Experiment away! :angry: **But do not stress the public NTP servers** :angry:, those are there for all to enjoy! :relaxed:)
 
 You can specify a server pool or use a default one. Servers in a pool will be pinged in a round-robin fashion, starting from the first one in the list. If a request fails or times out, the next server is pinged, all until the successful count of NTP pings is reached (or the entire thing times out). See [Configuration Object](#configuration-object)  below for customization details.
 
-The algorithm used is based on a standard **NTP** ([Network Time Protocol](https://en.wikipedia.org/wiki/Network_Time_Protocol)) time estimation algorithm, so its **precision depends both on NTP servers' time accuracy and on the latency of succesful NTP pings**. Server address is customizable, so if you have some fancy-shmancy GPS-Atomic-etc. Time Server on your local network ([like this](http://www.gpsntp.com/) or something), punch its IP in and let'er rip! By default, though, it uses [Public NTP time server pool](http://www.pool.ntp.org/en/), so your latency/mileage may vary. Do not assume Public NTP is precise, expect microsecond accuracy, or use this code to synchronize satellites orbiting a black hole, the thing was developed for *Galilean Relativity 4D Space-Time* only.
+The algorithm used is based on a standard [NTP Clock Synchronization Algorithm](https://en.wikipedia.org/wiki/Network_Time_Protocol#Clock_synchronization_algorithm), so its **precision depends both on NTP servers' time accuracy and on the latency of succesful NTP pings**. Server address is customizable, so if you have some fancy-shmancy GPS-Atomic-etc. Time Server on your local network ([like this](http://www.gpsntp.com/) or something), punch its IP in and let'er rip! By default, though, it uses [Public NTP time server pool](http://www.pool.ntp.org/en/), so your latency/mileage may vary. Do not assume Public NTP is precise.
+
+## What it doesn't do
+    * Does not deal with the _time zones_, time delta provided is UTC Unix Milliseconds only.
+    * Does not deal with the _daylight savings_, time delta provided is UTC Unix Milliseconds only.
+    * Does not deal with _relativistic time dilation_. Developed for *Galilean Relativity 4D Space-Time* only. Do not use this code to synchronize satellites orbiting a black hole.
+    * Provide millisecond accuracy. Actual confidence interval, at worst, in various conditions, is about fifth of a second (~200 ms).
 
 ## Installation
 
@@ -103,13 +109,17 @@ The test script (see **`source-es6/ntpSyncTest.es6`**) performs two requests one
 Your output should be something like this:
 ```
 NTP DATA:
-"(Local Time - NTP Time) Delta = 3.5 ms"
-"Corresponding Minimal Ping Latency was 15 ms"
+"(Local Time - NTP Time) Delta = 1488.5 ms"
+"Corresponding Minimal Ping Latency was 73 ms"
 "Calculated from 8 successful NTP Pings"
+Local UTC Clock Time: 2016-03-20T20:41:46.678Z
+Adjusted Local UTC Clock Time: 2016-03-20T20:41:45.189Z
 NIST DATA:
-"(Local Time - NTP Time) Delta = 4 ms"
-"Corresponding Minimal Ping Latency was 40 ms"
+"(Local Time - NTP Time) Delta = 1512.5 ms"
+"Corresponding Minimal Ping Latency was 53 ms"
 "Calculated from 4 successful NTP Pings"
+Local UTC Clock Time: 2016-03-20T20:41:48.119Z
+Adjusted Local UTC Clock Time: 2016-03-20T20:41:46.606Z
 ```
 
 ### Other Test scripts
@@ -146,3 +156,4 @@ $ node ./distribution/ntpSyncTest.js
    4. Babel: Use next generation JavaScript, today. https://babeljs.io/
    5. How to Build and Publish ES6 npm Modules Today, with Babel. https://booker.codes/how-to-build-and-publish-es6-npm-modules-today-with-babel/
    6. JavaScript Promises: https://www.promisejs.org/
+   7. **ntp-client**: Pure Javascript implementation of the NTP Client Protocol. https://www.npmjs.com/package/ntp-client
