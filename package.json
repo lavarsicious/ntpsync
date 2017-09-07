@@ -1,6 +1,6 @@
 {
   "name": "ntpsync",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Calculate the delta between local clock and NTP time, via multiple requests to various servers in the server pool",
   "main": "./distribution/ntpSync.js",
   "scripts": {
