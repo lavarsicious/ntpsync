@@ -1,6 +1,5 @@
 const ntpClient = require('ntp-client');
 var gReq = 0;
-var gReqInProgress = false;
 
 const kDefaultLocalClockService = {
     Now: () => {
@@ -57,17 +56,8 @@ function ntpDatePromise(iNTPSingleRequestConfig) {
         gReq += 1;
         const localClockStart = clockService.Now();
 
-        if (gReqInProgress === true) {
-            console.error("ERROR: Simultaneous requests running!");
-            iRejectFunc("ERROR: Simultaneous requests running!");
-            return;
-        }
-
-        gReqInProgress = true;
         ntpClient.ntpReplyTimeout = timeoutLatency;
         ntpClient.getNetworkTime(serverAddress, 123, (iError, iDate) => {
-
-            gReqInProgress = false;
 
             if (iError) {
                 iRejectFunc(iError);
